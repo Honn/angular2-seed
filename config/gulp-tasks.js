@@ -263,6 +263,14 @@ const ssr = {
             .pipe($.replace("initialNavigation: 'legacy_enabled'", "initialNavigation: 'enabled'"))
             .pipe(gulp.dest('./'));
 
+    },
+    inline: function() {
+        return gulp.src('public/index.html', {base: './'})
+            .pipe($.inline({
+                base: 'public/assets/',
+                disabledTypes: ['svg', 'img', 'js']
+            }))
+            .pipe(gulp.dest('./'));
     }
 };
 
@@ -325,6 +333,7 @@ gulp.task('build:universal-dev',
         tasks.bundle.universal.browser.dev,
         tasks.bundle.universal.server.dev,
         tasks.views.assets.copy,
+        tasks.ssr.inline,
         tasks.clean.artifacts
     ));
 
@@ -338,6 +347,7 @@ gulp.task('build:universal-prod',
     tasks.bundle.universal.browser.prod,
     tasks.bundle.universal.server.prod,
     tasks.views.assets.copy,
+    tasks.ssr.inline,
     tasks.clean.artifacts
   ));
 

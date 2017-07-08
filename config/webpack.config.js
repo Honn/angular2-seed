@@ -5,7 +5,7 @@ const webpackMerge = require('webpack-merge'),
   webpackConfig = require('angular-webpack-config');
 
 const copyWebpackPlugin = require('copy-webpack-plugin'),
-  htmlElementsWebpackPlugin = require('html-elements-webpack-plugin');
+    htmlElementsWebpackPlugin = require('html-elements-webpack-plugin');
 
 const browserConfig = function(root, settings) {
   return {
@@ -17,7 +17,7 @@ const browserConfig = function(root, settings) {
     plugins: [
       /**
        * Plugin: CopyWebpackPlugin
-       * Description: Copy files and directories in webpack.
+       * Description: Copy files and dir ectories in webpack.
        *
        * Copies project static assets.
        *

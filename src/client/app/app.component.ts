@@ -8,7 +8,7 @@ import { MetaService } from '@ngx-meta/core';
 import { TranslateService } from '@ngx-translate/core';
 
 // external styles
-import '../assets/sass/normalize.scss';
+import '../assets/sass/base.scss';
 
 @Component({
     selector: 'app-root',

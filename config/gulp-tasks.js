@@ -250,6 +250,25 @@ const tests = {
 tests.run.displayName = 'tests:run';
 
 /**
+ * Server side rendering
+ */
+const ssr = {
+    legacyInitialNavigation: function() {
+        return gulp.src('src/client/app/app.module.ts', {base: './'})
+            .pipe($.replace("initialNavigation: 'enabled'", "initialNavigation: 'legacy_enabled'"))
+            .pipe(gulp.dest('./'));
+    },
+    enableInitialNavigation: function() {
+        return gulp.src('src/client/app/app.module.ts', {base: './'})
+            .pipe($.replace("initialNavigation: 'legacy_enabled'", "initialNavigation: 'enabled'"))
+            .pipe(gulp.dest('./'));
+
+    }
+};
+
+tests.run.displayName = 'tests:run';
+
+/**
  * Tasks
  */
 tasks.dummy = dummy;
@@ -259,6 +278,7 @@ tasks.views = views;
 tasks.ts = ts;
 tasks.bundle = bundle;
 tasks.tests = tests;
+tasks.ssr = ssr;
 
 /**
  * Task: clean
@@ -277,6 +297,7 @@ gulp.task('clean',
 gulp.task('build:spa-dev',
   gulp.series(
     settings.quick ? tasks.dummy : 'clean',
+    tasks.ssr.legacyInitialNavigation,
     tasks.bundle.spa.dev,
     tasks.views.assets.copy,
     tasks.clean.artifacts
@@ -288,6 +309,7 @@ gulp.task('build:spa-dev',
 gulp.task('build:spa-prod',
   gulp.series(
     settings.quick ? tasks.dummy : 'clean',
+    tasks.ssr.legacyInitialNavigation,
     tasks.bundle.spa.prod,
     tasks.views.assets.copy,
     tasks.clean.artifacts
@@ -297,13 +319,14 @@ gulp.task('build:spa-prod',
  * Task: build:universal-dev
  */
 gulp.task('build:universal-dev',
-  gulp.series(
-    settings.quick ? tasks.dummy : 'clean',
-    tasks.bundle.universal.browser.dev,
-    tasks.bundle.universal.server.dev,
-    tasks.views.assets.copy,
-    tasks.clean.artifacts
-  ));
+    gulp.series(
+        settings.quick ? tasks.dummy : 'clean',
+        tasks.ssr.enableInitialNavigation,
+        tasks.bundle.universal.browser.dev,
+        tasks.bundle.universal.server.dev,
+        tasks.views.assets.copy,
+        tasks.clean.artifacts
+    ));
 
 /**
  * Task: build:universal-prod
@@ -311,6 +334,7 @@ gulp.task('build:universal-dev',
 gulp.task('build:universal-prod',
   gulp.series(
     settings.quick ? tasks.dummy : 'clean',
+    tasks.ssr.enableInitialNavigation,
     tasks.bundle.universal.browser.prod,
     tasks.bundle.universal.server.prod,
     tasks.views.assets.copy,

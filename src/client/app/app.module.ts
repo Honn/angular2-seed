@@ -59,7 +59,7 @@ export function translateFactory(platformId: any, http: Http): TranslateLoader {
   imports: [
     BrowserModule,
     HttpTransferModule.forRoot(),
-    RouterModule.forRoot(routes,  { initialNavigation: 'enabled' }),
+    RouterModule.forRoot(routes,  { initialNavigation: 'legacy_enabled' }),
     HttpModule,
     CacheModule.forRoot(),
     ConfigModule.forRoot({

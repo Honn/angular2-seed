@@ -2,7 +2,6 @@
 import { Inject, NgModule, PLATFORM_ID } from '@angular/core';
 import { Http, HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-// import { RouterModule, Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
 // libs
@@ -14,8 +13,6 @@ import { ConfigFsLoader } from '@ngx-config/fs-loader';
 import { UniversalConfigLoader } from '@ngx-universal/config-loader';
 import { UniversalTranslateLoader } from '@ngx-universal/translate-loader';
 import { MetaLoader, MetaModule, MetaStaticLoader } from '@ngx-meta/core';
-// import { I18N_ROUTER_PROVIDERS, I18NRouterLoader, I18NRouterModule, RAW_ROUTES } from '@ngx-i18n-router/core';
-// import { I18NRouterConfigLoader } from '@ngx-i18n-router/config-loader';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -62,7 +59,7 @@ export function translateFactory(platformId: any, http: Http): TranslateLoader {
   imports: [
     BrowserModule,
     HttpTransferModule.forRoot(),
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes,  { initialNavigation: 'enabled' }),
     HttpModule,
     CacheModule.forRoot(),
     ConfigModule.forRoot({
@@ -75,13 +72,6 @@ export function translateFactory(platformId: any, http: Http): TranslateLoader {
       useFactory: (metaFactory),
       deps: [ConfigService, TranslateService]
     }),
-    // I18NRouterModule.forRoot(routes, [
-    //   {
-    //     provide: I18NRouterLoader,
-    //     useFactory: (i18nRouterFactory),
-    //     deps: [ConfigService, RAW_ROUTES]
-    //   }
-    // ]),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -90,9 +80,6 @@ export function translateFactory(platformId: any, http: Http): TranslateLoader {
       }
     })
   ],
-  // providers: [
-  //   I18N_ROUTER_PROVIDERS
-  // ],
   declarations: [
     AppComponent,
     ChangeLanguageComponent

@@ -1,7 +1,7 @@
 module.exports = {
   'rules': {
-    'color-hex-case': 'lower', // auto-fix
-    'color-hex-length': 'short', // auto-fix
+    'color-hex-case': 'upper', // auto-fix
+    'color-hex-length': 'long', // auto-fix
     'color-named': ['never', {
       'ignore': ['inside-function']
     }],
@@ -173,7 +173,7 @@ module.exports = {
     'comment-no-empty': true,
     'comment-whitespace-inside': 'always',
 
-    'indentation': 2, // auto-fix
+    'indentation': 4, // auto-fix
 
     'max-empty-lines': 1,
     'max-line-length': [130, {

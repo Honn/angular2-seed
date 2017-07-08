@@ -44,7 +44,7 @@ export function metaFactory(config: ConfigService, translate: TranslateService):
       'og:type': 'website',
       'og:locale': config.getSettings('i18n.defaultLanguage.culture'),
       'og:locale:alternate': config.getSettings('i18n.availableLanguages')
-        .map((language: any) => language.culture).toString()
+          .map((language: any) => language.culture).toString()
     }
   });
 }

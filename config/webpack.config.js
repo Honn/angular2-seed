@@ -66,6 +66,25 @@ const browserConfig = function(root, settings) {
 };
 
 /**
+ * App specific config
+ */
+var TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlugin;
+const customConfig = function(options, root, settings) {
+    return {
+        output: {},
+        resolve: {
+            plugins: [
+                new TsConfigPathsPlugin({
+                    tsconfig: "tsconfig.json",
+                    compiler: "typescript",
+                })
+            ]
+        },
+        plugins: []
+    };
+};
+
+/**
  * Webpack configuration
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
@@ -76,9 +95,9 @@ module.exports = function(options, root, settings) {
     case 'production':
       return !!options.platform
         ? options.platform === 'server'
-          ? webpackConfig.universal.server.prod(root, settings)
-          : webpackMerge(webpackConfig.universal.browser.prod(root, settings), browserConfig(root, settings))
-        : webpackMerge(webpackConfig.spa.prod(root, settings), browserConfig(root, settings));
+          ? webpackMerge(webpackConfig.universal.server.prod(root, settings), customConfig(options, root, settings))
+          : webpackMerge(webpackConfig.universal.browser.prod(root, settings), browserConfig(root, settings), customConfig(options, root, settings))
+        : webpackMerge(webpackConfig.spa.prod(root, settings), browserConfig(root, settings), customConfig(options, root, settings));
     case 'test':
     case 'testing':
       return webpackConfig.test(root, settings);
@@ -86,10 +105,13 @@ module.exports = function(options, root, settings) {
     case 'development':
       return !!options.platform
         ? options.platform === 'server'
-          ? webpackConfig.universal.server.dev(root, settings)
-          : webpackMerge(webpackConfig.universal.browser.dev(root, settings), browserConfig(root, settings))
+          ? webpackMerge(webpackConfig.universal.server.dev(root, settings), customConfig(options, root, settings))
+          : webpackMerge(webpackConfig.universal.browser.dev(root, settings), browserConfig(root, settings), customConfig(options, root, settings))
         : options.hmr
-          ? webpackMerge(webpackConfig.spa.hmr(root, settings), browserConfig(root, settings))
-          : webpackMerge(webpackConfig.spa.dev(root, settings), browserConfig(root, settings));
+          ? webpackMerge(webpackConfig.spa.hmr(root, settings), browserConfig(root, settings), customConfig(options, root, settings))
+          : webpackMerge(webpackConfig.spa.dev(root, settings), browserConfig(root, settings), customConfig(options, root, settings));
   }
 };
+
+
+

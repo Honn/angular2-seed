@@ -27,14 +27,6 @@ const browserConfig = function(root, settings) {
         {
           from: `${root(settings.paths.src.client.assets.root)}/config.json`,
           to: './config.json'
-        },
-        {
-          from: `${root(settings.paths.src.client.assets.root)}/i18n/en.json`,
-          to: './i18n/en.json'
-        },
-        {
-          from: `${root(settings.paths.src.client.assets.root)}/i18n/tr.json`,
-          to: './i18n/tr.json'
         }
       ]),
 

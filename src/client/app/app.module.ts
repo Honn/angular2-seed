@@ -11,10 +11,7 @@ import { ConfigLoader, ConfigModule, ConfigService } from '@ngx-config/core';
 import { ConfigHttpLoader } from '@ngx-config/http-loader';
 import { ConfigFsLoader } from '@ngx-config/fs-loader';
 import { UniversalConfigLoader } from '@ngx-universal/config-loader';
-import { UniversalTranslateLoader } from '@ngx-universal/translate-loader';
 import { MetaLoader, MetaModule, MetaStaticLoader } from '@ngx-meta/core';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // routes & components
 import { routes } from './app.routes';
@@ -29,9 +26,8 @@ export function configFactory(platformId: any, http: Http): ConfigLoader {
   return new UniversalConfigLoader(platformId, serverLoader, browserLoader);
 }
 
-export function metaFactory(config: ConfigService, translate: TranslateService): MetaLoader {
+export function metaFactory(config: ConfigService): MetaLoader {
   return new MetaStaticLoader({
-    callback: (key: string) => translate.get(key),
     pageTitlePositioning: config.getSettings('seo.pageTitlePositioning'),
     pageTitleSeparator: config.getSettings('seo.pageTitleSeparator'),
     applicationName: config.getSettings('system.applicationName'),
@@ -49,12 +45,6 @@ export function metaFactory(config: ConfigService, translate: TranslateService):
   });
 }
 
-export function translateFactory(platformId: any, http: Http): TranslateLoader {
-  const browserLoader = new TranslateHttpLoader(http);
-
-  return new UniversalTranslateLoader(platformId, browserLoader, './public/assets/i18n');
-}
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -70,14 +60,7 @@ export function translateFactory(platformId: any, http: Http): TranslateLoader {
     MetaModule.forRoot({
       provide: MetaLoader,
       useFactory: (metaFactory),
-      deps: [ConfigService, TranslateService]
-    }),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (translateFactory),
-        deps: [PLATFORM_ID, Http]
-      }
+      deps: [ConfigService]
     })
   ],
   declarations: [

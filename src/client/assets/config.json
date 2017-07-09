@@ -4,7 +4,7 @@
     "applicationUrl": "https://ng-seed-universal.azurewebsites.net"
   },
   "seo": {
-    "defaultPageTitle": "Seguro Canguro",
+    "defaultPageTitle": "DEFAULT_TITLE",
     "pageTitlePositioning": 10,
     "pageTitleSeparator": " | ",
     "defaultMetaDescription": "DEFAULT_META_DESCRIPTION"

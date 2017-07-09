@@ -16,7 +16,6 @@ import { MetaLoader, MetaModule, MetaStaticLoader } from '@ngx-meta/core';
 // routes & components
 import { routes } from './app.routes';
 import { AppComponent } from './app.component';
-import { ChangeLanguageComponent } from './change-language.component';
 
 // for AoT compilation
 export function configFactory(platformId: any, http: Http): ConfigLoader {
@@ -28,6 +27,7 @@ export function configFactory(platformId: any, http: Http): ConfigLoader {
 
 export function metaFactory(config: ConfigService): MetaLoader {
   return new MetaStaticLoader({
+    callback: (key: string) => key,
     pageTitlePositioning: config.getSettings('seo.pageTitlePositioning'),
     pageTitleSeparator: config.getSettings('seo.pageTitleSeparator'),
     applicationName: config.getSettings('system.applicationName'),
@@ -37,10 +37,7 @@ export function metaFactory(config: ConfigService): MetaLoader {
       description: config.getSettings('seo.defaultMetaDescription'),
       generator: 'ng-seed',
       'og:site_name': config.getSettings('system.applicationName'),
-      'og:type': 'website',
-      'og:locale': config.getSettings('i18n.defaultLanguage.culture'),
-      'og:locale:alternate': config.getSettings('i18n.availableLanguages')
-          .map((language: any) => language.culture).toString()
+      'og:type': 'website'
     }
   });
 }
@@ -64,8 +61,7 @@ export function metaFactory(config: ConfigService): MetaLoader {
     })
   ],
   declarations: [
-    AppComponent,
-    ChangeLanguageComponent
+    AppComponent
   ],
   exports: [AppComponent],
   bootstrap: [AppComponent]

@@ -5,7 +5,6 @@ import { Routes } from '@angular/router';
 import { MetaGuard } from '@ngx-meta/core';
 
 // components
-import { ChangeLanguageComponent } from './change-language.component';
 
 export const routes: Routes = [
   {
@@ -26,10 +25,6 @@ export const routes: Routes = [
         isRoot: true
       }
     }
-  },
-  {
-    path: 'change-language/:languageCode',
-    component: ChangeLanguageComponent
   },
   {
     path: '**',

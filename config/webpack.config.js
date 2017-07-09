@@ -80,7 +80,23 @@ const customConfig = function(options, root, settings) {
                 })
             ]
         },
-        plugins: []
+        plugins: [],
+        module: {
+            rules: [
+                /**
+                 * to-string-loader, css-loader and sass-loader for *.scss
+                 *
+                 * See: https://github.com/gajus/to-string-loader
+                 * See: https://github.com/webpack-contrib/css-loader
+                 * See: https://github.com/webpack-contrib/sass-loader
+                 */
+                {
+                    test: /\.sass$/,
+                    use: ['to-string-loader', 'css-loader', 'sass-loader'],
+                    exclude: [root(`${settings.paths.src.client.root}/index.html`)]
+                },
+            ]
+        }
     };
 };
 

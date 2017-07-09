@@ -13,7 +13,7 @@ import '../assets/sass/base.scss';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
     title: string;

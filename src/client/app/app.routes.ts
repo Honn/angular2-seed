@@ -20,11 +20,6 @@ export const routes: Routes = [
       }
     ],
     canActivateChild: [MetaGuard],
-    data: {
-      i18n: {
-        isRoot: true
-      }
-    }
   },
   {
     path: '**',

@@ -19,7 +19,7 @@ export const routes: Routes = [
         loadChildren: './+about/about.module#AboutModule'
       }
     ],
-    canActivateChild: [MetaGuard],
+    canActivateChild: [MetaGuard]
   },
   {
     path: '**',

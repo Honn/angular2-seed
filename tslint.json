@@ -28,6 +28,7 @@
       true,
       "camelCase",
       "kr"
-    ]
+    ],
+    "no-default-export": false
   }
 }

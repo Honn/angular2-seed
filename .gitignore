@@ -9,6 +9,7 @@ public/
 .temp/
 *.d.ts
 *.metadata.json
+src/client/sandboxes.ts
 
 # dependencies
 node_modules/

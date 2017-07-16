@@ -23,8 +23,10 @@
     "serve": "npm run serve:universal",
     "serve:spa": "nodemon ./.server/spa-server.js",
     "serve:spa-hmr": "node ./.server/spa-server.hmr.js",
+    "serve:spa-playground": "node ./.server/spa-server.hmr.playground.js",
     "serve:universal": "nodemon ./.server/server.js",
-    "test": "karma start"
+    "test": "karma start",
+    "playground": "angular-playground"
   },
   "dependencies": {
     "express": "^4.15.3",
@@ -72,6 +74,7 @@
     "@types/lodash": "4.14.55",
     "@types/node": "^8.0.5",
     "add-asset-html-webpack-plugin": "^2.0.1",
+    "angular-playground": "^1.7.0",
     "angular-tslint-rules": "^1.0.3",
     "angular-webpack-config": "^1.0.1",
     "angular2-template-loader": "0.6.0",

@@ -1,11 +1,15 @@
 /**
  * Webpack helpers & dependencies
  */
+const webpack = require('webpack');
+const path = require('path');
 const webpackMerge = require('webpack-merge'),
   webpackConfig = require('angular-webpack-config');
 
 const copyWebpackPlugin = require('copy-webpack-plugin'),
     htmlElementsWebpackPlugin = require('html-elements-webpack-plugin');
+
+const playgroundConfig = require('./webpack.spa.playground.hmr');
 
 const browserConfig = function(root, settings) {
   return {
@@ -69,8 +73,11 @@ const customConfig = function(options, root, settings) {
                 new TsConfigPathsPlugin({
                     tsconfig: "tsconfig.json",
                     compiler: "typescript",
-                })
-            ]
+                }),
+            ],
+            alias: {
+                'sandboxes': path.resolve(__dirname, '../src/client/sandboxes.ts')
+            }
         },
         plugins: [],
         module: {
@@ -118,6 +125,8 @@ module.exports = function(options, root, settings) {
         : options.hmr
           ? webpackMerge(webpackConfig.spa.hmr(root, settings), browserConfig(root, settings), customConfig(options, root, settings))
           : webpackMerge(webpackConfig.spa.dev(root, settings), browserConfig(root, settings), customConfig(options, root, settings));
+  case 'playground':
+      return webpackMerge(playgroundConfig(root, settings), browserConfig(root, settings), customConfig(options, root, settings))
   }
 };
 

@@ -161,6 +161,14 @@ const bundle = {
           $$.webpackFormatter(err, stats, done);
         });
     },
+    playground: function(done) {
+        const conf = $.webpackConfig({ env: 'playground' }, $$.root, settings);
+
+        $.webpack(conf)
+            .run(function(err, stats) {
+                $$.webpackFormatter(err, stats, done);
+            });
+    },
     prod: function(done) {
       const conf = $.webpackConfig({ env: 'prod' }, $$.root, settings);
 
@@ -310,6 +318,18 @@ gulp.task('build:spa-dev',
     tasks.views.assets.copy,
     tasks.clean.artifacts
   ));
+
+/**
+ * Task: build:spa-playground
+ */
+gulp.task('build:spa-playground',
+    gulp.series(
+        settings.quick ? tasks.dummy : 'clean',
+        tasks.ssr.legacyInitialNavigation,
+        tasks.bundle.spa.playground,
+        tasks.views.assets.copy,
+        tasks.clean.artifacts
+    ));
 
 /**
  * Task: build:spa-prod

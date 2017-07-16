@@ -11,7 +11,7 @@
     "importHelpers": true,
     "baseUrl": ".",
     "paths": {
-      "stuff/*": ["src/client/app/stuff/*"]
+      "alias-example/*": ["src/client/app/alias-example/*"]
     },
     "lib": [ "es2015", "dom" ],
     "typeRoots": [

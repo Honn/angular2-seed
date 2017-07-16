@@ -1,13 +1,15 @@
 // angular
 import { Component, OnInit } from '@angular/core';
-import { FOO } from 'stuff/things';
+import { ALIAS_VALUE } from 'alias-example/alias-config';
 
 @Component({
   template: `ng-seed (universal) home page<br/>
-  Enjoy it!<br/>`
+  Enjoy it!<br/><br/>
+  {{ aliasData }}`
 })
 export class HomeComponent implements OnInit {
+    aliasData: string;
     ngOnInit(): void {
-        console.warn(FOO);
+        this.aliasData = ALIAS_VALUE;
     }
 }

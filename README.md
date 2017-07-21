@@ -9,8 +9,19 @@ Based on ng-seed/universal, modified to suite my need better.
  * Supports tsconfig path aliases for better imports (no ../../../ spam).
  * Added Angular Playground and commands to run it with HMR
 
+# Dev
+To build and run in development mode with hot module reloading:
+ * npm run build:spa-dev
+ * npm run serve:spa-hmr
+ 
+# Prod
+To run a true production build with AOT compilation and server side rendering:
+ * npm run build:spa-prod
+ * npm run serve:universal (this runs on nodemon and should be usable in deployment)
+
 # Playground
 Create a .sandbox.ts file to add a component to the playground. See the playgroundDemo component.
+
 To generate the playground:
  * npm run playground (this does currently not exit properly, so just close it when done)
  * npm run build:spa-dev

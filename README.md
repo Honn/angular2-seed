@@ -17,7 +17,7 @@ To build and run in development mode with hot module reloading:
 # Prod
 To run a true production build with AOT compilation and server side rendering:
  * npm run build:spa-prod
- * npm run serve:universal (this runs on nodemon and should be usable in deployment)
+ * npm run serve:universal (this runs on nodemon and should be supplimented by forever or something similar in deployment)
 
 # Playground
 Create a .sandbox.ts file to add a component to the playground. See the playgroundDemo component.
